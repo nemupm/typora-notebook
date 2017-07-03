@@ -6,7 +6,7 @@ export TYPORA_NOTEBOOK_DIR=${TYPORA_NOTEBOOK_DIR:-$HOME/.typora-notebook}
 export TYPORA_NOTEBOOK_NOTEBOOKS_DIR=${TYPORA_NOTEBOOK_NOTEBOOKS_DIR:-$HOME/.typora-notebook/notebooks}
 export TYPORA_NOTEBOOK_COMMAND=${TYPORA_NOTEBOOK_COMMAND:-typora}
 
-TYPORA_NOTEBOOK_ROOT="$(builtin cd "$(dirname "$BASH_SOURCE")" && pwd)"
+TYPORA_NOTEBOOK_ROOT="$(builtin cd "$(dirname "${BASH_SOURCE:-$0}")" && pwd)"
 
 __typora_notebook::init::init()
 {
