@@ -27,7 +27,7 @@ __typora_notebook::util::cross_search()
         | __typora_notebook::model::note::get_all \
         | awk \
             -f $TYPORA_NOTEBOOK_ROOT/src/share/word_count.awk \
-            -v search_string=$_search_string \
+            -v search_string="$_search_string" \
         | sort -t":" -k1 -nr \
         | peco \
         | __typora_notebook::util::get_filename
