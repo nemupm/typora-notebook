@@ -7,6 +7,9 @@ __typora_notebook::util::typora()
     else
         _file=$(cat <&0)
     fi
+    if [ -z "$_file" ]; then
+        return 1;
+    fi
     open -a $TYPORA_NOTEBOOK_APP "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_file"
 }
 
