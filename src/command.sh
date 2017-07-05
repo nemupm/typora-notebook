@@ -14,6 +14,10 @@ __typora_notebook::command()
                 __typora_notebook::function::open_file_by_name
             ;;
 
+            --open-notebook|-n)
+                __typora_notebook::function::open_file_in_notebook
+            ;;
+
             --create-note|--create|-c)
                 _note_name=${2}
                 __typora_notebook::function::create_new_file "$_note_name"
@@ -54,6 +58,7 @@ Usage:
 
 Options:
     --open, -o                  open note by name
+    --open-notebook, -n         choose notebook and open note in the notebook
     --create-note, -c <string>  create new note with input name
     --create-notebook <string>  create new notebook with input name
     --search, -s <string>       search all notes for input string

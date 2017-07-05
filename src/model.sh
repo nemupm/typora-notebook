@@ -9,14 +9,16 @@ __typora_notebook::model::notebook::get_all()
 
 __typora_notebook::model::note::get()
 {
-    IFS='\n'
     if [[ -n $1 ]] && [[ -f $1 ]]; then
-        cd $(cat "$1")
+        _notebook=$(cat "$1")
     else
-        cd $(cat <&0)
+        _notebook=$(cat <&0)
     fi
-    cd "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR"
-    ls -1 -t
+    if [ -z "$_notebook" ]; then
+        return 1;
+    fi
+    ls -1 -t "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_notebook/" \
+        | awk -v notebook="$_notebook" '{print notebook "/" $0}'
 }
 
 __typora_notebook::model::note::get_all()

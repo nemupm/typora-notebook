@@ -7,6 +7,19 @@ __typora_notebook::function::open_file_by_name()
         | __typora_notebook::util::typora
 }
 
+__typora_notebook::function::open_file_in_notebook()
+{
+    notes=$(__typora_notebook::model::notebook::get_all \
+        | peco \
+        | __typora_notebook::model::note::get)
+    if [ $? -ne 0 ]; then
+        return 1;
+    fi
+    echo -e "$notes" \
+        | peco \
+        | __typora_notebook::util::typora
+}
+
 __typora_notebook::function::open_file_by_search()
 {
     _search_string="$1"
