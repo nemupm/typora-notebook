@@ -22,7 +22,8 @@ __typora_notebook::model::note::get()
 __typora_notebook::model::note::get_all()
 {
     cd "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR"
-    find . -name "*.md" -type f -mindepth 1 \
+    find . -name "*.md" -type f -mindepth 1 -print0 \
+        | xargs -0 ls -t \
         | awk '{gsub("^./", "", $0); print $0}'
 }
 
