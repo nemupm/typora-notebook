@@ -15,7 +15,7 @@ __typora_notebook::model::note::get()
         _notebook=$(cat <&0)
     fi
     if [ -z "$_notebook" ]; then
-        return 1;
+        return 1
     fi
     ls -1 -t "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_notebook/" \
         | awk -v notebook="$_notebook" '{print notebook "/" $0}'
@@ -34,6 +34,9 @@ __typora_notebook::model::note::new()
     _note_name="$1"
     _notebook=$(__typora_notebook::model::notebook::get_all \
         | peco)
+    if [ -z "$_notebook" ]; then
+        return 1
+    fi
     touch "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_notebook/$_note_name.md"
     echo "$_notebook/$_note_name.md"
 }
