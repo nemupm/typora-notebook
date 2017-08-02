@@ -37,7 +37,11 @@ __typora_notebook::model::note::new()
     if [ -z "$_notebook" ]; then
         return 1
     fi
-    touch "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_notebook/$_note_name.md"
+    _note="$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_notebook/$_note_name.md"
+    touch "$_note"
+    if [ ! -s "$_note" ]; then
+        echo "# $_note_name\n" > "$_note"
+    fi
     echo "$_notebook/$_note_name.md"
 }
 
