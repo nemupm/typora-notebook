@@ -1,5 +1,5 @@
 {
-    command = sprintf("grep \"%s\" -o \"%s\" |wc -l", search_string, $0);
+    command = sprintf("grep \"%s\" -io \"%s\"|wc -l", search_string, $0);
     command | getline word_count;
     close(command);
     sub(/^[ \t]+/, "", word_count);
