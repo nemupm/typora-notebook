@@ -50,3 +50,17 @@ __typora_notebook::model::notebook::new()
     _notebook_name="$1"
     mkdir -p "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_notebook_name"
 }
+
+__typora_notebook::model::note::copy_content()
+{
+    _copy_from="$1"
+    _copy_to="$2"
+
+    cat "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_copy_from" \
+        > "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_copy_to"
+
+    _note_name_copy_to=$(echo "$_copy_to" \
+        | awk -F'/' '{gsub(".md", ""); print $NF}')
+
+    sed -i -e "1s/.*/# $_note_name_copy_to/g" "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_copy_to"
+}

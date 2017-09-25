@@ -6,7 +6,7 @@ __typora_notebook::command()
     do
         case ${1} in
 
-            --debug|-d)
+            --debug)
                 set -x
             ;;
 
@@ -28,6 +28,10 @@ __typora_notebook::command()
                 _notebook_name=${2}
                 __typora_notebook::function::create_new_notebook "$_notebook_name"
                 shift
+            ;;
+
+            --duplicate-notebook|-d)
+                __typora_notebook::function::duplicate_file
             ;;
 
             --search|-s)
@@ -62,6 +66,7 @@ Options:
     --create-note, -c <string>  create new note with input name
     --create-notebook <string>  create new notebook with input name
     --search, -s <string>       search all notes for input string
+    --duplicate-notebook, -d    duplicate note
     --help, -h                  print this
 
 Author: nemupm

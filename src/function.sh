@@ -34,6 +34,24 @@ __typora_notebook::function::create_new_file()
         | __typora_notebook::util::typora
 }
 
+__typora_notebook::function::duplicate_file()
+{
+    _file_to_duplicate=$(__typora_notebook::model::note::get_all \
+        | peco)
+    if [ -z "$_file_to_duplicate" ]; then
+        return 1;
+    fi
+
+    _new_name=$(echo "$_file_to_duplicate" \
+        | __typora_notebook::util::tovim)
+    if [ -z "$_new_name" ]; then
+        return 1;
+    fi
+
+    __typora_notebook::model::note::copy_content \
+        "$_file_to_duplicate" "$_new_name"
+}
+
 __typora_notebook::function::create_new_notebook()
 {
     _notebook_name="$1"
