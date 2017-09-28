@@ -52,6 +52,24 @@ __typora_notebook::function::duplicate_file()
         "$_file_to_duplicate" "$_new_name"
 }
 
+__typora_notebook::function::rename_file()
+{
+    _file_to_rename=$(__typora_notebook::model::note::get_all \
+        | peco)
+    if [ -z "$_file_to_rename" ]; then
+        return 1;
+    fi
+
+    _new_name=$(echo "$_file_to_rename" \
+        | __typora_notebook::util::tovim)
+    if [ -z "$_new_name" ]; then
+        return 1;
+    fi
+
+    __typora_notebook::model::note::rename \
+        "$_file_to_rename" "$_new_name"
+}
+
 __typora_notebook::function::create_new_notebook()
 {
     _notebook_name="$1"

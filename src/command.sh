@@ -30,8 +30,12 @@ __typora_notebook::command()
                 shift
             ;;
 
-            --duplicate-notebook|-d)
+            --duplicate-note|-d)
                 __typora_notebook::function::duplicate_file
+            ;;
+
+            --rename-note|-r)
+                __typora_notebook::function::rename_file
             ;;
 
             --search|-s)
@@ -66,7 +70,8 @@ Options:
     --create-note, -c <string>  create new note with input name
     --create-notebook <string>  create new notebook with input name
     --search, -s <string>       search all notes for input string
-    --duplicate-notebook, -d    duplicate note
+    --duplicate-note, -d        duplicate note
+    --rename-note, -r           rename note
     --help, -h                  print this
 
 Author: nemupm

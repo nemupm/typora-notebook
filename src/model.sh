@@ -64,3 +64,17 @@ __typora_notebook::model::note::copy_content()
 
     sed -i -e "1s/.*/# $_note_name_copy_to/g" "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_copy_to"
 }
+
+__typora_notebook::model::note::rename()
+{
+    _rename_from="$1"
+    _rename_to="$2"
+
+    mv "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_rename_from" \
+        "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_rename_to"
+
+    _note_name_rename_to=$(echo "$_rename_to" \
+        | awk -F'/' '{gsub(".md", ""); print $NF}')
+
+    sed -i -e "1s/.*/# $_note_name_rename_to/g" "$TYPORA_NOTEBOOK_NOTEBOOKS_DIR/$_rename_to"
+}
